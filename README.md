@@ -1,4 +1,8 @@
-# Recipe for deterministic custom nixOS ISO builds
+# Action  for custom nixOS ISO builds
+
+
+[![Build Reproducible NixOS ISO](https://github.com/ansible42/custom_nixos_iso/actions/workflows/build-iso.yml/badge.svg)](https://github.com/ansible42/custom_nixos_iso/actions/workflows/build-iso.yml)
+
 
 Build custom nixOS ISO (the ISO is "custom" in that it contains a custom package
 named "hello_syncom")
