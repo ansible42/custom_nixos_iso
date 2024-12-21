@@ -29,7 +29,7 @@ RUN if [-z "$NIXPKGS_COMMIT_SHA"]; then\
             git checkout FETCH_HEAD && \
             cd ../ ;
     fi
-ENV NIX_PATH=nixpkgs=/build/nixpkg; \
+ENV NIX_PATH=nixpkgs=/build/nixpkg
 
 #########################################################
 # Step 2: Build docker image
