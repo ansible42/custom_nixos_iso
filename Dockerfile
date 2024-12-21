@@ -18,7 +18,7 @@ RUN if [-z "$NIXPKGS_COMMIT_SHA"]; then\
             git remote add origin https://github.com/NixOS/nixpkgs.git && \
             git fetch --depth 1 origin && \
             git checkout FETCH_HEAD && \
-            cd ../ ;
+            cd ../ ;\
     else \
         nix-env -i git && \
             mkdir -p /build/nixpkgs && \
