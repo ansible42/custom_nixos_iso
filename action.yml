@@ -1,0 +1,18 @@
+name: 'Build NIX ISO'
+description: 'Builds a custom nix-os iso image based on custom config'
+author: 'Taylor Kendall'
+inputs:
+  buildEnv_nix_config:
+    description: 'the nix.conf file to be isntalled on the build image prior to building the iso'
+    required: false
+  iso_nix_config:
+    description: 'custom nix iso image file'
+    required: true
+  branding:
+  color: 'blue'
+  icon: 'bicycle'
+  runs:
+    using: 'composite'
+  steps:
+    - run : ${GITHUB_ACTION_PATH}/build_iso.sh
+      shell: bash
