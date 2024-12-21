@@ -37,4 +37,4 @@ ENV NIX_PATH=nixpkgs=/build/nixpkg
 COPY src/ /build/src
 
 # Build final artifact
-RUN nix-build -A config.system.build.isoImage -I nixos-config=src/iso_configuration.nix
+RUN nix-build '</build/result/iso/>' -A config.system.build.isoImage -I nixos-config=src/iso_configuration.nix
