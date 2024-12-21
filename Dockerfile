@@ -1,6 +1,6 @@
 # The following information is from https://hub.docker.com/r/nixos/nix/tags
 FROM nixos/nix:latest as image_builder
-ARG NIXPKGS_COMMIT_SHA
+ARG NIXPKGS_COMMIT_FETCH
 #########################################################
 # Step 1: Prepare nixpkgs for deterministic builds
 #########################################################
@@ -9,8 +9,8 @@ WORKDIR /build
 COPY /env/ /build/env
 ENV NIX_USER_CONF_FILES=/build/env/nix.conf
 
-RUN if [-z "$NIXPKGS_COMMIT_SHA"]; then\
-        echo "No NIXPKGS_COMMIT_SHA specified using latest"\
+RUN if [-z "$NIXPKGS_COMMIT_FETCH"]; then\
+        echo "No NIXPKGS_COMMIT_FETCH specified using latest on main branch"\
         nix-env -i git && \
             mkdir -p /build/nixpkgs && \
             cd nixpkgs && \
@@ -25,7 +25,7 @@ RUN if [-z "$NIXPKGS_COMMIT_SHA"]; then\
             cd nixpkgs && \
             git init && \
             git remote add origin https://github.com/NixOS/nixpkgs.git && \
-            git fetch --depth 1 origin ${NIXPKGS_COMMIT_SHA} && \
+            git fetch --depth 1 origin ${NIXPKGS_COMMIT_FETCH} && \
             git checkout FETCH_HEAD && \
             cd ../ ;\
     fi
@@ -37,4 +37,4 @@ ENV NIX_PATH=nixpkgs=/build/nixpkg
 COPY src/ /build/src
 
 # Build final artifact
-RUN nix-build src/iso_configuration.nix
+RUN nix-build -A config.system.build.isoImage -I nixos-config=src/iso_configuration.nix
