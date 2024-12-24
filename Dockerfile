@@ -35,6 +35,6 @@ ENV NIX_PATH=nixpkgs=/build/nixpkg
 # Step 2: Build docker image
 #########################################################
 COPY src/ /build/src
-
+RUN mkdir ./build/result/iso/
 # Build final artifact
 RUN nix-build ./build/result/iso/ -A config.system.build.isoImage -I nixos-config=src/iso_configuration.nix
